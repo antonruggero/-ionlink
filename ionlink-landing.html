@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IONLINK | Coming Soon</title>
+<style>
+  html, body {
+    margin: 0; padding: 0; height: 100%; width: 100%;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+    overflow: hidden;
+  }
+
+  /* Общие стили для текста с "волнистым" эффектом */
+  .wave-text, .subtitle, .countdown, footer {
+    font-weight: 900;
+    color: transparent;
+    background: linear-gradient(
+      120deg,
+      rgba(255,255,255,0.05) 0%,
+      rgba(255,255,255,0.8) 40%,
+      rgba(255,255,255,1) 50%,
+      rgba(255,255,255,0.8) 60%,
+      rgba(255,255,255,0.05) 100%
+    );
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: waveMove 30s ease-in-out infinite;
+    animation-direction: alternate;
+  }
+
+  .wave-text {
+    font-size: 6vw;
+    letter-spacing: 0.15em;
+    margin: 0;
+  }
+
+  .subtitle {
+    font-weight: 700;
+    font-size: 2vw;
+    margin-top: 1rem;
+    max-width: 80vw;
+    line-height: 1.4;
+    user-select: none;
+  }
+
+  .countdown {
+    font-weight: 700;
+    font-size: 2.8vw;
+    margin-top: 3vh;
+  }
+
+  footer {
+    position: fixed;
+    bottom: 15px;
+    width: 100%;
+    font-size: 1vw;
+    user-select: none;
+    opacity: 0.3;
+  }
+
+  /* Хаотичная анимация смещения и масштабирования градиента */
+  @keyframes waveMove {
+    0% {
+      background-position: 10% 30%;
+      background-size: 380% 380%;
+    }
+    25% {
+      background-position: 60% 70%;
+      background-size: 400% 400%;
+    }
+    50% {
+      background-position: 80% 20%;
+      background-size: 420% 420%;
+    }
+    75% {
+      background-position: 40% 80%;
+      background-size: 390% 390%;
+    }
+    100% {
+      background-position: 10% 30%;
+      background-size: 380% 380%;
+    }
+  }
+
+  /* Адаптивность для мобилок */
+  @media (max-width: 600px) {
+    .wave-text {
+      font-size: 18vw;
+      animation-duration: 40s;
+    }
+    .countdown {
+      font-size: 7vw;
+      animation-duration: 40s;
+    }
+    .subtitle {
+      font-size: 3.5vw;
+      max-width: 90vw;
+    }
+    footer {
+      font-size: 3vw;
+      opacity: 0.2;
+    }
+  }
+</style>
+</head>
+<body>
+  <h1 class="wave-text">IONLINK</h1>
+  <p class="subtitle">
+    The future of social connection is on the way.<br />
+    Launching by the end of 2025 — stay tuned.
+  </p>
+  <div class="countdown" id="countdown">Loading...</div>
+  <footer>&copy; 2025 ionlink.org. All rights reserved.</footer>
+
+  <script>
+    function updateCountdown() {
+      const endDate = new Date('Dec 31, 2025 23:59:59').getTime();
+      const now = Date.now();
+      const diff = endDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").textContent = "We're live!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").textContent =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
